@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    links:
+      - mongo
+    depends_on:
+      - mongo
+    volumes:
+      - ./tugaspijar:/app # Mount proyek Golang Anda ke dalam container
+
+  mongo:
+    image: mongo:latest
+    container_name: simple-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - simple_mongodbdata:/data/db
+
+volumes:
+  simple_mongodbdata:
